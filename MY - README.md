@@ -83,11 +83,28 @@ HOOKS COVERED:
 
     it will be rendered only very first time.
 
-    syntax: useEffect(setup, dependencies?)
-
     if there is no dependencies it will render continously to avoide it use the dependency which is second para meter and its an array.
 
     it will be rendered only when the state of the component change
+
+    mainly used for api calls
+
+    syntax: useEffect(setup, dependencies?)
+
+==============================================================================================================================
+
+
+need to start from 5:26:02
+
+note:- 
+
+need to concentrate on all topics and work more on each topic seperately.
+
+
+
+                                CONSISTENCY IS A KEY FOR SUCESS 🔑 ...!
+                                        WORK HARDER THEN THE HARDEST BROTHER ..!
+
 
     
 
