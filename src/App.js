@@ -4,29 +4,45 @@ import Footer from './Footer';
 import Header from './Header';
 import { useState } from 'react';
 import SearchItem from './SearchItem';
+import { useEffect } from 'react';
 
 
 function App() {
-  const [items, setItem] = useState(JSON.parse(
-    (localStorage.getItem('todo_list'))
-  ));
+  const API_URl ='http://localhost:3000/items';
 
+  const [items, setItem] = useState([]);
   const [newItem, setNewItem] = useState('');
   const [search, setSearch] = useState('');
+
+  useEffect(() => {
+    const fetchItems =async () => {
+      try {
+        const response = await fetch(API_URl);
+        const listitems = await response.json();
+        console.log(listitems);
+        setItem(listitems);
+
+      } catch (err) {
+
+        console.log(err.stack);
+        
+      }
+    }
+
+    (async () => await fetchItems())()
+  },[])
 
   const addItem = (item) => {
     const id = items.length ? items[items.length - 1].id + 1 : 1;
     const addNewItem = { id, checked: false, item }
     const listItems = [...items, addNewItem]
     setItem(listItems)
-    localStorage.setItem("todo_list", JSON.stringify(listItems))
   }
 
   const handleCheck = (id) => {
     const listItems = items.map((item) =>
       item.id === id ? { ...item, checked: !item.checked } : item)
     setItem(listItems)
-    localStorage.setItem("todo_list", JSON.stringify(listItems))
 
   }
 
@@ -34,7 +50,6 @@ function App() {
     const listItems = items.filter((item) =>
       item.id !== id)
     setItem(listItems)
-    localStorage.setItem("todo_list", JSON.stringify(listItems))
   }
 
   const handleSubmit = (e) => {
