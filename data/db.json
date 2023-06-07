@@ -1,19 +1,29 @@
 {
-    "items": [
-        {
-            "id": 1,
-            "checked": false,
-            "item": "javascript"
-        },
-        {
-            "id": 2,
-            "checked": true,
-            "item": "java"
-        },
-        {
-            "id": 3,
-            "checked": false,
-            "item": "html"
-        }
-    ]
+  "items": [
+    {
+      "id": 1,
+      "checked": false,
+      "item": "javascript"
+    },
+    {
+      "id": 2,
+      "checked": true,
+      "item": "java"
+    },
+    {
+      "id": 3,
+      "checked": false,
+      "item": "html"
+    },
+    {
+      "id": 4,
+      "checked": false,
+      "item": "check-1"
+    },
+    {
+      "id": 5,
+      "checked": false,
+      "item": "check-2"
+    }
+  ]
 }

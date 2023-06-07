@@ -5,6 +5,7 @@ import Header from './Header';
 import { useState } from 'react';
 import SearchItem from './SearchItem';
 import { useEffect } from 'react';
+import apiRequest from './apiRequest';
 
 
 function App() {
@@ -42,11 +43,21 @@ function App() {
    
   }, [])
 
-  const addItem = (item) => {
+  const addItem = async (item) => {
     const id = items.length ? items[items.length - 1].id + 1 : 1;
     const addNewItem = { id, checked: false, item }
     const listItems = [...items, addNewItem]
     setItem(listItems)
+    const postOptions = {
+      method: "POST",
+      headers:{
+        'content-type': 'application/json'
+      },
+      body :JSON.stringify(addNewItem)
+    }
+    
+    const result = await apiRequest(API_URl,postOptions)
+    if(result) setfetchError(result)
   }
 
   const handleCheck = (id) => {
