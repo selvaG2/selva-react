@@ -63,6 +63,52 @@ Concepts covered:
 
 13. useEffect
 
+14. API fetch
+
+    Create a seperate variable to store the api url ( Why seperate variable is if the link has to be updated we dont need to 
+    do the updation all over the code just do it in the variable to avoid errors).
+
+    using useEffect hook we are going to retrive the datas from the server only once to increase the app speed.
+
+    inside the use effect hook we are creatinga fetch async arrow function.
+
+    using try catch block we are fetching the data, create a seperate variable for storing the response with fetch method of await to wait for the response
+
+    create a listitems to store the response this also in await manner wait untill the response in converted into json
+
+    in the set item add that list items to display the fetched details
+
+    Here some error handlings:
+
+    if the api fails :-
+
+            create a seperate condition if the response is not ok (!response.ok) then throw an error message
+    
+    if the error is in fetching process :-
+
+            create a seperate state to main taoin the error and initially it will be null, if there is no fetch error set it to null ,if there is any fetch error catch in the catch block catch it and send it to the fetch error fun (setfetchError).
+
+    if all is working perfectly it doesm`t mean all tym the data will fetch faster to make the user interactive :-
+
+            set a loader time for the fetchItems function and call the fetchItems function in async method last() is used to imediately invoke the function with 2 sec delay 
+
+            to maintain this loading state create a seperatye state initially is loading willbe true after the fetching of data make the loading state to false
+    
+    The error messages should not get messed up to avoid that :-
+
+    all the messages will be printed in the content component make that component to be in main tag inside that 
+
+        1. isLoading is processed displauy a message wit the help of && symbol 
+
+        2. if any error message id catched the display it using &&
+
+        3. if that both process are not happening then only u should do the logic (!isLoading && !fetchError &&)
+
+        4. there is a main already in content component remove that and add <> </> this is called as React.fragment
+
+
+
+
 ==============================================================================================================================
 
 HOOKS COVERED:

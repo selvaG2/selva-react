@@ -8,29 +8,39 @@ import { useEffect } from 'react';
 
 
 function App() {
-  const API_URl ='http://localhost:3000/items';
+  const API_URl = 'http://localhost:3100/items';
 
   const [items, setItem] = useState([]);
   const [newItem, setNewItem] = useState('');
   const [search, setSearch] = useState('');
+  const [fetchError, setfetchError] = useState(null);
+  const [isLoading,setisLoading] =useState(true);
 
   useEffect(() => {
-    const fetchItems =async () => {
+    const fetchItems = async () => {
       try {
         const response = await fetch(API_URl);
+        if (!response.ok) throw Error("Data not received")
         const listitems = await response.json();
         console.log(listitems);
         setItem(listitems);
+        setfetchError(null)
 
       } catch (err) {
 
-        console.log(err.stack);
-        
+        setfetchError(err.message);
+
+      } finally {
+        setisLoading(false)
       }
     }
+    setTimeout( () => {
+      
+      (async () => await fetchItems())()
+    },2000)
 
-    (async () => await fetchItems())()
-  },[])
+   
+  }, [])
 
   const addItem = (item) => {
     const id = items.length ? items[items.length - 1].id + 1 : 1;
@@ -70,12 +80,17 @@ function App() {
         search={search}
         setSearch={setSearch}
       />
-      <Content
-        items={items.filter(item => ((item.item)
-        .toLowerCase()).includes(search.toLowerCase()))}
-        handleCheck={handleCheck}
-        handleDelete={handleDelete}
-      />
+      <main>
+        {isLoading && <p> {`Loading items..Stay calm.!`}</p>}
+        {fetchError && <p> {`Error : ${fetchError}`}</p>}
+        {!isLoading && !isLoading && <Content
+          items={items.filter(item => ((item.item)
+            .toLowerCase()).includes(search.toLowerCase()))}
+          handleCheck={handleCheck}
+          handleDelete={handleDelete}
+        />}
+      </main>
+
       <Footer
         length={items.length}
       />
