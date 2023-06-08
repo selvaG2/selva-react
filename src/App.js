@@ -86,11 +86,7 @@ function App() {
     setItem(listItems)
 
     const deleteOptions = {
-      method: "DELETE",
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(listItems)
+      method: "DELETE"
     }
 
     const reqUrl = `${API_URl}/${id}`
