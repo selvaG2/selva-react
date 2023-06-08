@@ -12,18 +12,13 @@
     },
     {
       "id": 3,
-      "checked": false,
+      "checked": true,
       "item": "html"
     },
     {
       "id": 4,
       "checked": false,
       "item": "check-1"
-    },
-    {
-      "id": 5,
-      "checked": false,
-      "item": "check-2"
     }
   ]
 }

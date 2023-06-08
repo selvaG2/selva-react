@@ -15,7 +15,7 @@ function App() {
   const [newItem, setNewItem] = useState('');
   const [search, setSearch] = useState('');
   const [fetchError, setfetchError] = useState(null);
-  const [isLoading,setisLoading] =useState(true);
+  const [isLoading, setisLoading] = useState(true);
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -35,12 +35,12 @@ function App() {
         setisLoading(false)
       }
     }
-    setTimeout( () => {
-      
-      (async () => await fetchItems())()
-    },2000)
+    setTimeout(() => {
 
-   
+      (async () => await fetchItems())()
+    }, 2000)
+
+
   }, [])
 
   const addItem = async (item) => {
@@ -50,27 +50,52 @@ function App() {
     setItem(listItems)
     const postOptions = {
       method: "POST",
-      headers:{
+      headers: {
         'content-type': 'application/json'
       },
-      body :JSON.stringify(addNewItem)
+      body: JSON.stringify(addNewItem)
     }
-    
-    const result = await apiRequest(API_URl,postOptions)
-    if(result) setfetchError(result)
+
+    const result = await apiRequest(API_URl, postOptions)
+    if (result) setfetchError(result)
   }
 
-  const handleCheck = (id) => {
+  const handleCheck = async (id) => {
     const listItems = items.map((item) =>
       item.id === id ? { ...item, checked: !item.checked } : item)
     setItem(listItems)
 
+    const myItem = listItems.filter(item => item.id === id)
+
+    const updateOptions = {
+      method: "PATCH",
+      headers: {
+        'content-type': 'application/json'
+      },
+    body: JSON.stringify({checked:myItem[0].checked})
+    }
+    const reqUrl = `${API_URl}/${id}`
+    const result = await apiRequest(reqUrl, updateOptions)
+    if (result) setfetchError(result)
+
   }
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     const listItems = items.filter((item) =>
       item.id !== id)
     setItem(listItems)
+
+    const deleteOptions = {
+      method: "DELETE",
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(listItems)
+    }
+
+    const reqUrl = `${API_URl}/${id}`
+    const result = await apiRequest(reqUrl, deleteOptions)
+    if (result) setfetchError(result)
   }
 
   const handleSubmit = (e) => {

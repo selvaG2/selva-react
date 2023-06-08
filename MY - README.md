@@ -2,7 +2,7 @@ Packages
 
 i)  npm install react-icons --save (to install react-icons)
 ii) npm install react-scripts --save ('react-scripts' is not recognized as an internal or external command, operable program or batch file.)
-iii) npx json-server --watch data/db.json --port 3000 (fake rest api)
+iii) npx json-server --watch data/db.json --port 3100 (fake rest api)
 
 ==============================================================================================================================
 
@@ -64,6 +64,7 @@ Concepts covered:
 13. useEffect
 
 14. API fetch
+    Read:-
 
     Create a seperate variable to store the api url ( Why seperate variable is if the link has to be updated we dont need to 
     do the updation all over the code just do it in the variable to avoid errors).
@@ -106,8 +107,50 @@ Concepts covered:
 
         4. there is a main already in content component remove that and add <> </> this is called as React.fragment
 
+    ApiRequest File:-
+
+        Create a async function with the parameter of url as default parameter of '' empty string, option obj for POST,GET,PATCH,DELETE, err message for if there is any error this will carry out.
+
+        within try catch block create a variable to store the response which is fetching the details from the url and with the req option, if there is some error in the response error will be thrown
+
+        if try block throw any error catch block will catch that and it will store into it
+
+        finally will execute all tym with the error msg
 
 
+    Create:-
+
+        make the add item function as async function 
+
+        create a option object inside that
+
+            1. method it is post
+            2. headers is an another obj which holds type of the content
+            3. body will have the datas thats sent by stringfying
+            4. create a result that will have the result objects/strings
+            5. with await call the apiRequest function with url andf option para meter
+            6. if the response came maintain the fetcherror state to be in null 
+
+    Update :-
+
+        make the handle check function as async function 
+
+        create an another variable to take the particular set of values to be updated using in the listitem apply filter property of item.id == id which the functuion params
+
+        create a option object inside that
+
+            1. method it is patch
+            2. headers is an another obj which holds type of the content
+            3. body will have the datas thats sent by stringfying
+            NOTE: Here we just need to update only the particular   objects particular value for that checked property of  myitems[0] why 0 is there will be only one arr element that sin index 0 with checked property
+            4. create a req url to req tthe server for particular id 
+            5. create a result that will have the result objects/strings
+            6. with await call the apiRequest function with url andf option para meter
+            7. if the response came maintain the fetcherror state to be in null 
+
+    Delete:-
+
+        some changes method to delete
 
 ==============================================================================================================================
 
